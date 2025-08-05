@@ -139,6 +139,13 @@
         .ingredients-day-button {
             transition: all 0.3s;
         }
+        
+        #game-section iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 1rem;
+        }
     </style>
 </head>
 <body class="bg-[#0d1117] text-white font-inter p-4 md:p-8">
@@ -160,7 +167,8 @@
         <button data-target="scenario" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navScenario">Senaryo Analizi</button>
         <button data-target="cities" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navCities">Şehirler</button>
         <button data-target="verdict" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navVerdict">Karar & Tavsiye</button>
-        <button data-target="predictions" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navPredictions">Gerçekleşen Tahminler</button>
+        <button data-target="predictions" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navPredictions">Tahmin Sonuçları</button>
+        <button data-target="game-section" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navGame">Oyun</button>
     </nav>
 
     <main class="max-w-7xl mx-auto">
@@ -647,7 +655,7 @@
             <div id="city-analysis-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Bursa</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%65</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%65</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
                             Sağladığınız verilere göre Bursa'da oraj oluşumu için yüksek potansiyel bulunmaktadır. Rüzgar yönü ve hızındaki belirgin değişiklikler, atmosferde bir cephe veya hava kütlesi değişiminin habercisi olabilir. Saat 15:00'te belirtilen vorticity (+10, +20) ve öğle saatlerinde 40'larda olan bulk shear değerleri, kuvvetli fırtına potansiyeline ve dönme hareketlerine işaret etmektedir. Nem oranının geceye doğru %70'e kadar yükselmesi de oraj için gerekli koşulları sağlamaktadır. Bu durum, özellikle öğleden sonra ve akşam saatlerinde yerel olarak kuvvetli orajların oluşabileceğini göstermektedir.
@@ -657,7 +665,7 @@
 
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Orhaneli (Bursa)</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
                             Orhaneli gibi dağlık bölgelerde, yüksek sıcaklık ve nemin birleşimi güçlü termik yükselimlere neden olur. Sizin verilerinizdeki 1000'e yakın CAPE değerleri ve yüksek nem oranları (%43-%70), bu coğrafi özelliklerle birleştiğinde oraj oluşumu için en ideal ortamı yaratır. Oraj ihtimali, öğleden sonra zirveye ulaşacak olup, yerel olarak şiddetli yağış, dolu ve rüzgar beklenebilir.
@@ -667,7 +675,7 @@
                 
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Balıkesir</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%60</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%60</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
                             Balıkesir için de yüksek CAPE ve yeterli nem koşulları mevcuttur. Öğleden sonraki saatlerde 35-40'a ulaşan bulk shear değerleri ve saat 18:00'de rüzgarın 30km/s hıza ulaşması, kuvvetli konvektif hareketlerin olabileceğini düşündürmektedir. Bu durum, yerel olarak güçlü oraj hücrelerinin oluşumuna zemin hazırlamaktadır. Bursa'ya göre biraz daha düşük bir ihtimal olsa da risk devam etmektedir.
@@ -677,10 +685,40 @@
 
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Eskişehir</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%50</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%50</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
                             Sağladığınız verilere göre Eskişehir'de +20, +30 gibi yüksek vorticity (dönme hareketi) değerleri bulunmaktadır. Bu durum, bölgede yüksek enerji potansiyeli ile birlikte oraj oluşumunu tetikleyebilecek hava hareketlerinin olduğunu göstermektedir. Bulk shear değerleri diğer bölgelere göre daha düşük olsa da, yüksek enerji ve vorticity, yerel olarak kuvvetli oraj riskini artırmaktadır. Öğleden sonra termik yükselimlerle birlikte kısa süreli ve yerel orajlar görülebilir.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Kütahya</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Kütahya'da yüksek sıcaklık ve nemin birleşimiyle güçlü termik yükselimler beklenmektedir. Yüksek CAPE değerleri ve yeterli nem, oraj oluşumu için ideal koşulları sağlamaktadır.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">İnegöl (Bursa)</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            İnegöl'de yüksek CAPE ve Bulk Shear değerleri, kuvvetli fırtına potansiyeline işaret etmektedir. Öğleden sonra ve akşam saatlerinde yerel olarak kuvvetli orajlar ve hücre oluşumları beklenmektedir.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Tavşanlı (Kütahya)</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Tavşanlı'da dağlık coğrafya ve yüksek nemin birleşimi, oraj oluşumu için uygun ortamı yaratmaktadır. Yüksek ihtimalle kısa süreli ancak etkili orajlar görülebilir.
                         </p>
                     </div>
                 </div>
@@ -690,11 +728,16 @@
         <section id="verdict" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="verdictTitle">Karar & Tavsiye</h2>
             <div id="verdict-content" class="text-lg text-gray-300">
+                <h3 class="text-2xl font-bold text-[#62d9ff] mb-4">Salı Analizi ve Tavsiye</h3>
                 <p class="mb-4" data-i18n="verdictText1">
                     Tüm verilerin analizine dayanarak, özellikle Bursa ve çevresinde kuvvetli fırtına potansiyeli yüksek beklenmektedir.
                 </p>
                 <p class="mb-4" data-i18n="verdictText2">
                     - Yüksek CAPE ve Bulk Shear değerleri olan bölgelerin özellikle takip edilmesi gerekmektedir. Kuvvetli fırtına ve şiddetli yağışlar olasıdır.
+                </p>
+                <h3 class="text-2xl font-bold text-[#62d9ff] mt-8 mb-4">Çarşamba Analizi ve Tavsiye</h3>
+                <p class="mb-4">
+                    Çarşamba günü için yapılan profesyonel analizlere göre; İstanbul, Tekirdağ, Kocaeli, Sakarya, Bursa ve Bilecik illerinde kuvvetli gök gürültülü sağanak yağışlar beklenmektedir. Bu bölgelerde zaman zaman yüksek yoğunlukta şimşek aktivitesi kaydedileceğinden, ilgili otoritelerin ve vatandaşların dikkatli olması büyük önem taşımaktadır. Özellikle İstanbul ilinde, atmosferik koşulların dolu oluşumu için uygun olduğu gözlemlenmiştir. Olası olumsuzluklara karşı gerekli önlemlerin alınması tavsiye edilir.
                 </p>
                 <p data-i18n="verdictText3">
                     - Meteoroloji Genel Müdürlüğü'nün yerel hava tahminlerini takip etmeniz ve olası olumsuz hava olaylarına karşı hazırlıklı olmanız tavsiye edilir.
@@ -703,18 +746,106 @@
         </section>
 
         <section id="predictions" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="predictionsTitle">Gerçekleşen Tahminler</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold neon-text">Eskişehir</h3>
-                        <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
-                    </div>
-                    <div class="flex justify-between items-center text-lg text-gray-300">
-                        <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">%50</span></span>
-                        <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Oraj</span></span>
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="predictionsTitle">Tahmin Sonuçları</h2>
+            
+            <div class="mb-10">
+                <h3 class="text-3xl font-bold text-[#62d9ff] mb-6">5 Ağustos Salı 2025</h3>
+
+                <div class="mb-8">
+                    <h4 class="text-2xl font-bold neon-text mb-4">Gerçekleşen Tahminler</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Afyonkarahisar</h5>
+                                <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#38ffc0] font-bold">~%85</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Bölgesel hücre</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Eskişehir</h5>
+                                <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ff4d4d] font-bold">~%50</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Organize hücre</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Tavşanlı (Kütahya)</h5>
+                                <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">~%70-80</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Kısa süreli oraj</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">İnegöl (Bursa)</h5>
+                                <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">~%70-80</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Hücre</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Kütahya</h5>
+                                <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">~%70-80</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Bölgesel olarak hücre</span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="mb-8">
+                    <h4 class="text-2xl font-bold neon-text mb-4">Kısmen Gerçekleşen Tahminler</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Bursa</h5>
+                                <span class="bg-[#ffeb3b] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Kısmen Gerçekleşti!</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">~%65</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#ffeb3b] font-bold">Zayıf Oraj</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-2xl font-bold neon-text mb-4">Gerçekleşmeyen Tahminler</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ff4d4d] transition-colors duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-2xl font-bold neon-text">Orhaneli (Bursa)</h5>
+                                <span class="bg-[#ff4d4d] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşmedi</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg text-gray-300">
+                                <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">~%70</span></span>
+                                <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#ff4d4d] font-bold">Yok</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        
+        <section id="game-section" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="gameTitle">Oyun Alanı</h2>
+            <div id="game-content">
+                <iframe src="game.html" title="Oyun Alanı"></iframe>
             </div>
         </section>
 
