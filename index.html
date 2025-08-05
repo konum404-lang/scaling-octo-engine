@@ -160,6 +160,7 @@
         <button data-target="scenario" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navScenario">Senaryo Analizi</button>
         <button data-target="cities" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navCities">Şehirler</button>
         <button data-target="verdict" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navVerdict">Karar & Tavsiye</button>
+        <button data-target="predictions" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navPredictions">Gerçekleşen Tahminler</button>
     </nav>
 
     <main class="max-w-7xl mx-auto">
@@ -701,25 +702,18 @@
             </div>
         </section>
 
-        <section id="mgm" class="p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="mgmTitle">MGM Uyarıları</h2>
+        <section id="predictions" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="predictionsTitle">Gerçekleşen Tahminler</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="card alert bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#ff4d4d]">
-                    <h3 class="text-2xl font-bold text-[#ff4d4d] mb-2" data-i18n="mgmAlertTitle">MGM Uyarısı:</h3>
-                    <p class="text-gray-300 text-lg" data-i18n="mgmAlertText">
-                        Bursa bölgesi için kuvvetli hava olayları uyarısı yapılmıştır. Ani sağanak yağışlar, şimşek, dolu ve kuvvetli rüzgarlara karşı gerekli önlemleri alınız.
-                    </p>
-                </div>
-                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748]">
-                    <h3 class="text-2xl font-bold text-[#00ffff] mb-2" data-i18n="mgmInfoTitle">Diğer Uyarılar:</h3>
-                    <ul class="list-disc list-inside text-gray-300 text-lg">
-                        <li data-i18n="mgmOtherWarning1">
-                            **Marmara Bölgesi:** Kuzeyli yönlerden kuvvetli rüzgar (30-50 km/s) beklenmektedir. Deniz ulaşımında ve dış mekan aktivitelerinde dikkatli olunmalıdır.
-                        </li>
-                        <li data-i18n="mgmOtherWarning2">
-                            **Doğu Karadeniz Kıyıları, Denizli, Kütahya, Afyonkarahisar, Eskişehir, Bolu ve Ordu Çevreleri:** Yerel sağanak ve gök gürültülü sağanak yağışlar beklenmektedir.
-                        </li>
-                    </ul>
+                <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#38ffc0] transition-colors duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold neon-text">Eskişehir</h3>
+                        <span class="bg-[#38ffc0] text-[#0d1117] text-sm font-bold px-3 py-1 rounded-full" data-i18n="predictionStatus">Gerçekleşti!</span>
+                    </div>
+                    <div class="flex justify-between items-center text-lg text-gray-300">
+                        <span data-i18n="predictionProbability">Tahmin Edilen İhtimal: <span class="text-[#ffeb3b] font-bold">%50</span></span>
+                        <span data-i18n="predictionEvent">Gerçekleşen Olay: <span class="text-[#38ffc0] font-bold">Oraj</span></span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -804,7 +798,7 @@
 
             // Language switcher logic
             const langSwitcher = document.getElementById('lang-switcher');
-            const langText = document.getElementById('lang-text'); 
+            const langText = document.getElementById('lang-text');
             const currentLang = 'tr'; // Assuming Turkish is the default based on user prompt
 
             langSwitcher.addEventListener('click', () => {
