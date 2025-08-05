@@ -51,7 +51,7 @@
         }
 
         .card-details.open {
-            max-height: 500px; /* Adjust based on content */
+            max-height: 500px; /* Adjust as needed */
             padding-top: 1.5rem;
             opacity: 1;
         }
@@ -135,6 +135,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .ingredients-day-button {
+            transition: all 0.3s;
+        }
     </style>
 </head>
 <body class="bg-[#0d1117] text-white font-inter p-4 md:p-8">
@@ -143,7 +147,6 @@
         <h1 class="text-5xl md:text-7xl font-bold neon-text mb-2" data-i18n="appHeadline">DJ-water</h1>
         <p class="text-xl md:text-2xl text-gray-400" data-i18n="appSubHeadline">Meteorolojik Senaryo Analiz Platformu</p>
         
-        <!-- Language Switcher -->
         <div class="absolute top-0 right-0 mt-4 mr-4">
             <button id="lang-switcher" class="p-2 rounded-full bg-[#1a202c] text-white hover:bg-[#2d3748] transition-colors duration-200">
                 <span id="lang-text">EN</span>
@@ -151,73 +154,217 @@
         </div>
     </header>
 
-    <!-- Navigation -->
     <nav class="flex flex-wrap justify-center space-x-4 md:space-x-8 mb-12 nav-button-group">
-        <button data-target="summary" class="nav-button active text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navSummary">Günün Özeti</button>
-        <button data-target="ingredients" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navIngredients">Fırtına Malzemeleri</button>
+        <button data-target="summary" class="nav-button active text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navSummary">Günlük Özet</button>
+        <button data-target="ingredients" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navIngredients">Fırtına Bileşenleri</button>
         <button data-target="scenario" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navScenario">Senaryo Analizi</button>
         <button data-target="cities" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navCities">Şehirler</button>
         <button data-target="verdict" class="nav-button text-lg md:text-xl font-bold text-gray-300 hover:text-cyan-400 p-2" data-i18n="navVerdict">Karar & Tavsiye</button>
     </nav>
 
-    <!-- Main Content Sections -->
     <main class="max-w-7xl mx-auto">
 
-        <!-- Section: Summary -->
         <section id="summary" class="content-section active p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="summaryTitle">Günün Özeti</h2>
-            <p class="text-lg text-gray-300 mb-4" data-i18n="summaryIntro">
-                Çarşamba hava durumu verileri, potansiyel olarak güçlü bir fırtına gelişimi için çeşitli işaretler gösteriyor. Analizimiz, bu durumun olgunlaşma aşamasında olduğunu ve takip edilmesi gerektiğini belirtiyor.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-[#00ffff] mb-2" data-i18n="summaryForecastTitle">Genel Tahmin</h3>
-                    <p class="text-gray-400" data-i18n="summaryForecastText">
-                        Hafif yağışlarla başlayıp, öğleden sonra yerel olarak şiddetli gök gürültülü fırtınaya dönüşme potansiyeli yüksek. En riskli bölgeler İç Anadolu ve Batı Karadeniz.
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="summaryTitle">Günlük Özet</h2>
+            <div id="summary-cards" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
+                    <h3 class="text-2xl font-bold neon-text mb-2" data-i18n="summaryTuesdayForecastTitle">Salı Tahmini</h3>
+                    <p class="text-lg text-gray-300 mb-4" data-i18n="summaryTuesdayIntro">
+                        Verilere göre, Salı günü özellikle Bursa ve Balıkesir'de öğleden sonra ve akşam saatlerinde yerel kuvvetli orajların oluşma ihtimali bulunmaktadır. Oraj oluşumu için gerekli enerji (CAPE) ve nem seviyeleri yüksektir.
                     </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryRiskTitle">Risk Seviyesi</h4>
+                            <span class="text-4xl font-bold text-[#ffeb3b]" data-i18n="summaryRiskLevelModerate">Orta</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryProbabilityTitle">İhtimal</h4>
+                            <span class="text-4xl font-bold text-[#ffeb3b]">60%</span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-2xl font-bold text-[#00ffff] mb-2" data-i18n="summaryRiskTitle">Risk Seviyesi</h3>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-5xl font-bold text-[#ffeb3b]" data-i18n="summaryRiskLevel">Orta</span>
-                        <p class="text-gray-400" data-i18n="summaryRiskText">
-                            Durumun yakından takip edilmesi gerekiyor. Gelişmeler, risk seviyesini hızla yükseltebilir.
-                        </p>
+                <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
+                    <h3 class="text-2xl font-bold neon-text mb-2" data-i18n="summaryWednesdayForecastTitle">Çarşamba Tahmini</h3>
+                    <p class="text-lg text-gray-300 mb-4" data-i18n="summaryWednesdayIntro">
+                        Çarşamba günü hava durumu verileri, güçlü bir fırtına gelişimi için çeşitli işaretler gösteriyor. Analizlerimiz, bu durumun olgunlaşma aşamasında olduğunu ve takip edilmesi gerektiğini belirtiyor.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryForecastTitle">Genel Tahmin</h4>
+                            <p class="text-gray-400" data-i18n="summaryForecastText">
+                                Öğleden sonra başlayacak hafif yağışlarla birlikte yerel kuvvetli oraj gelişme potansiyeli mevcut. En çok risk altında olan bölgeler İç Anadolu ve Batı Karadeniz.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryRiskTitle">Risk Seviyesi</h4>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-4xl font-bold text-[#ffeb3b]" data-i18n="summaryRiskLevelHigh">Yüksek</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-800 p-4 rounded-xl text-gray-300">
+            
+            <div class="mt-8 p-4 bg-[#ff4d4d] rounded-xl text-[#0d1117] font-bold flex items-center space-x-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#0d1117]" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.327a1.5 1.5 0 012.486 0l7.25 12.5a1.5 1.5 0 01-1.243 2.173H2.25a1.5 1.5 0 01-1.243-2.173l7.25-12.5zM10 8a1 1 0 011 1v4a1 1 0 11-2 0V9a1 1 0 011-1zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                </svg>
+                <p data-i18n="summaryWednesdayToThursdayAlert">
+                    Çarşambayı Perşembeye bağlayan gece fırtına çok güçlenebilir.
+                </p>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-xl text-gray-300 mt-8">
                 <p class="font-bold" data-i18n="summaryLastUpdateLabel">Son Güncelleme:</p>
-                <p data-i18n="summaryLastUpdateValue">Çarşamba, 12:00 UTC</p>
+                <p data-i18n="summaryLastUpdateValue">Salı, 15:00 UTC</p>
             </div>
         </section>
 
-        <!-- Section: Ingredients -->
         <section id="ingredients" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="ingredientsTitle">Fırtınanın Malzemeleri</h2>
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="ingredientsTitle">Fırtına Bileşenleri</h2>
             <p class="text-lg text-gray-300 mb-8" data-i18n="ingredientsIntro">
-                Fırtına oluşumu için gerekli olan dört ana bileşeni inceliyoruz. Her bir bileşenin gücünü ve etkisini görmek için aşağıdaki kartlara tıklayın.
+                Fırtına oluşumu için gerekli dört ana bileşeni analiz ediyoruz. Her bir bileşenin gücünü ve etkisini görmek için aşağıdaki kartlara tıklayın.
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card: Energy -->
-                <div data-details="energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+            <div id="ingredients-selector" class="flex flex-wrap justify-center gap-4 mb-8">
+                <button data-target="monday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="monday">Pazartesi</button>
+                <button data-target="tuesday-ingredients-content" class="ingredients-day-button active px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="tuesday">Salı</button>
+                <button data-target="wednesday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="wednesday">Çarşamba</button>
+                <button data-target="thursday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="thursday">Perşembe</button>
+                <button data-target="friday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="friday">Cuma</button>
+                <button data-target="saturday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="saturday">Cumartesi</button>
+                <button data-target="sunday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="sunday">Pazar</button>
+            </div>
+            
+            <div id="monday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="monday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
-                    <p class="text-gray-400" data-i18n="energyCardText">Ortamdaki potansiyel enerji miktarı.</p>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="monday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="mondayEnergyDetailsText">
+                        Pazartesi için potansiyel enerji seviyeleri ortalama düzeyde. Bu durum, güçlü fırtına oluşumu için yeterli bir zemin sağlamıyor.
+                    </p>
+                </div>
+                <div data-details="monday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="monday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="mondayMoistureDetailsText">
+                        Havadaki nem oranı ortalama seviyelerde. Bu, hafif yağışlara neden olabilir, ancak güçlü fırtına gelişimi için yetersizdir.
+                    </p>
+                </div>
+                <div data-details="monday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="monday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="mondayTriggerDetailsText">
+                        Atmosferde konvektif hareketi başlatacak güçlü bir tetikleyici bulunmuyor. Bu nedenle fırtına potansiyeli düşüktür.
+                    </p>
+                </div>
+                <div data-details="monday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="monday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="mondayOrganizationDetailsText">
+                        Rüzgar kesmesi (shear) gibi organize bir sistem oluşturacak faktörler yetersizdir. Olası yağışlar yerel ve kısa süreli olacaktır.
+                    </p>
+                </div>
+            </div>
+
+            <div id="tuesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section active">
+                <div data-details="tuesday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#38ffc0]" style="width: 90%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="high">Yüksek</span>
+                </div>
+                <div id="tuesday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="tuesdayEnergyDetailsText">
+                        Salı günü için CAPE değerleri oldukça yüksek seviyelerde. Bu durum, özellikle öğleden sonra ve akşam saatlerinde, güçlü dikey hava hareketleri ve dolu oluşumu potansiyeli için bir zemin oluşturuyor.
+                    </p>
+                </div>
+
+                <div data-details="tuesday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#38ffc0]" style="width: 85%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="sufficient">Yeterli</span>
+                </div>
+                <div id="tuesday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="tuesdayMoistureDetailsText">
+                        Bölgedeki yüksek nem seviyeleri Salı günkü oraj potansiyelini güçlendiriyor. Havadaki nem, oraj gelişimini destekleyecek ve şiddetli yağışlara neden olacaktır.
+                    </p>
+                </div>
+
+                <div data-details="tuesday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 80%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="present">Mevcut</span>
+                </div>
+                <div id="tuesday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="tuesdayTriggerDetailsText">
+                        Yüzeyde oluşan konverjans hatları ve gün içi ısınma, oraj oluşumu için yeterli bir tetikleyici sağlıyor. Hava kütlesi ısınarak yükseliyor ve oraj hücrelerinin oluşumuna yol açıyor.
+                    </p>
+                </div>
+
+                <div data-details="tuesday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="weak">Zayıf</span>
+                </div>
+                <div id="tuesday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="tuesdayOrganizationDetailsText">
+                        Organizasyon seviyesi orta düzeyde olmasına rağmen, daha büyük ve organize bir fırtına sistemi yerine yerel olarak kuvvetli hücrelerin oluşması bekleniyor.
+                    </p>
+                </div>
+            </div>
+
+            <div id="wednesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="wednesday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
                     <div class="mt-4 progress-bar-container">
                         <div class="progress-bar bg-[#38ffc0]" style="width: 85%;"></div>
                     </div>
                     <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="high">Yüksek</span>
                 </div>
-                <!-- Card Details: Energy -->
-                <div id="energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
-                    <p class="text-gray-300" data-i18n="energyDetailsText">
-                        CAPE (Convective Available Potential Energy) değerleri, atmosferin yukarı doğru hareket için ne kadar enerjiye sahip olduğunu gösterir. Çarşamba günü, özellikle öğleden sonra için CAPE değerleri yüksek seviyelerde seyrediyor, bu da güçlü dikey hava akımları ve potansiyel olarak büyük dolu tanelerinin oluşabileceği anlamına gelir.
+                <div id="wednesday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="wednesdayEnergyDetailsText">
+                        CAPE (Konvektif Kullanılabilir Potansiyel Enerji) değerleri, atmosferin dikey hareketi için ne kadar enerjiye sahip olduğunu gösterir. Çarşamba günü için, özellikle öğleden sonra, CAPE değerleri yüksek seviyelerde olup bu durum güçlü dikey hava akımlarının ve potansiyel olarak büyük dolu tanelerinin oluşabileceği anlamına gelir.
                     </p>
                 </div>
 
-                <!-- Card: Moisture -->
-                <div data-details="moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                <div data-details="wednesday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
                     <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
                     <div class="mt-4 progress-bar-container">
@@ -225,15 +372,13 @@
                     </div>
                     <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="sufficient">Yeterli</span>
                 </div>
-                <!-- Card Details: Moisture -->
-                <div id="moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
-                    <p class="text-gray-300" data-i18n="moistureDetailsText">
-                        Yüzeyden 700 hPa seviyesine kadar olan hava katmanında yüksek miktarda su buharı mevcut. Bu nem, fırtınanın gelişimini destekleyecek ve şiddetli yağışlara zemin hazırlayacaktır. Karadeniz üzerinden gelen nemli hava akışı, bu durumu pekiştiriyor.
+                <div id="wednesday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="wednesdayMoistureDetailsText">
+                        Yüzeyden 700 hPa seviyesine kadar olan hava katmanında yüksek miktarda su buharı bulunmaktadır. Bu nem, fırtına gelişimini destekleyecek ve şiddetli yağışlara zemin hazırlayacaktır. Karadeniz üzerinden gelen nemli hava akışı bu durumu pekiştirmektedir.
                     </p>
                 </div>
 
-                <!-- Card: Trigger -->
-                <div data-details="trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                <div data-details="wednesday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
                     <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
                     <div class="mt-4 progress-bar-container">
@@ -241,15 +386,13 @@
                     </div>
                     <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="present">Mevcut</span>
                 </div>
-                <!-- Card Details: Trigger -->
-                <div id="trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
-                    <p class="text-gray-300" data-i18n="triggerDetailsText">
-                        Bölgeden geçen bir kısa dalga (shortwave trough) ve yüzeyde oluşan konverjans hatları, atmosferi yukarı doğru iterek konvektif hareketi başlatmak için yeterli tetikleyiciyi sağlıyor. Bu mekanizmalar, mevcut enerji ve nemi kullanarak fırtınanın oluşumuna yol açacaktır.
+                <div id="wednesday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="wednesdayTriggerDetailsText">
+                        Bölge üzerinden geçecek olan kısa dalga oluğu (shortwave trough) ve yüzeyde oluşacak konverjans hatları, atmosferi yukarı doğru iterek konvektif hareketi başlatmak için yeterli bir tetikleyici sağlamaktadır. Bu mekanizmalar, mevcut enerji ve nemi kullanarak fırtına oluşumuna yol açacaktır.
                     </p>
                 </div>
 
-                <!-- Card: Organization -->
-                <div data-details="organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                <div data-details="wednesday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
                     <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
                     <div class="mt-4 progress-bar-container">
@@ -257,619 +400,421 @@
                     </div>
                     <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="weak">Zayıf</span>
                 </div>
-                <!-- Card Details: Organization -->
-                <div id="organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
-                    <p class="text-gray-300" data-i18n="organizationDetailsText">
-                        Şimdilik fırtına hücrelerinin organize bir sistem (örneğin bir süper hücre) oluşturma potansiyeli düşük görünüyor. Rüzgar kesmesi (shear) değerleri, organize bir yapı için yeterli değil. Ancak, bu durumun takip edilmesi gerekiyor.
+                <div id="wednesday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="wednesdayOrganizationDetailsText">
+                        Şu an için fırtına hücrelerinin organize bir sistem (örn: süper hücre) oluşturma potansiyeli düşük görünüyor. Rüzgar kesmesi (shear) değerleri, organize bir yapı için yeterli değil. Ancak bu durumun takip edilmesi gerekmektedir.
                     </p>
                 </div>
             </div>
-        </section>
 
-        <!-- Section: Scenario -->
+            <div id="thursday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="thursday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="thursday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="thursdayEnergyDetailsText">
+                        Perşembe günü için potansiyel enerji seviyeleri ortalama düzeyde. Fırtına oluşumu için gerekli enerji seviyeleri yüksek değil.
+                    </p>
+                </div>
+                <div data-details="thursday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="thursday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="thursdayMoistureDetailsText">
+                        Havadaki nem oranı ortalama seviyelerde. Bölgesel olarak hafif yağışlar görülebilir, ancak fırtına oluşumunu destekleyecek yeterli nem mevcut değil.
+                    </p>
+                </div>
+                <div data-details="thursday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="thursday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="thursdayTriggerDetailsText">
+                        Perşembe günü için atmosferi tetikleyecek belirgin bir mekanizma beklenmiyor. Gün içi ısınma dışında bir tetikleyici bulunmuyor.
+                    </p>
+                </div>
+                <div data-details="thursday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="thursday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="thursdayOrganizationDetailsText">
+                        Fırtına hücrelerinin organize olma potansiyeli çok düşüktür. Muhtemel yağışlar düzensiz ve kısa süreli olacaktır.
+                    </p>
+                </div>
+            </div>
+
+            <div id="friday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="friday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="friday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="fridayEnergyDetailsText">
+                        Cuma günü enerji seviyeleri ortalama civarında seyredecek. Bu durum, fırtına potansiyelini düşük tutmaktadır.
+                    </p>
+                </div>
+                <div data-details="friday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="friday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="fridayMoistureDetailsText">
+                        Havadaki nem oranı fırtına oluşumu için yeterli seviyede değil. Bölgesel nem, ancak hafif yağışlara sebep olabilir.
+                    </p>
+                </div>
+                <div data-details="friday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="friday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="fridayTriggerDetailsText">
+                        Cuma günü için atmosferde konveksiyonu tetikleyecek güçlü bir sistem beklenmiyor. Hava durumu genellikle durağan olacak.
+                    </p>
+                </div>
+                <div data-details="friday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="friday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="fridayOrganizationDetailsText">
+                        Fırtına organizasyonu için gerekli koşullar oluşmayacaktır. Gün içinde oluşabilecek bulutlar, düzensiz ve geçici olacaktır.
+                    </p>
+                </div>
+            </div>
+
+            <div id="saturday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="saturday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="saturday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="saturdayEnergyDetailsText">
+                        Cumartesi için enerji seviyeleri ortalama ve istikrarlı. Fırtına aktivitesi beklenmiyor.
+                    </p>
+                </div>
+                <div data-details="saturday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="saturday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="saturdayMoistureDetailsText">
+                        Hava genel olarak kuru, bu da fırtına oluşumu için olumsuz bir koşul yaratıyor.
+                    </p>
+                </div>
+                <div data-details="saturday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="saturday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="saturdayTriggerDetailsText">
+                        Atmosferde konveksiyonu tetikleyecek önemli bir mekanizma beklenmiyor.
+                    </p>
+                </div>
+                <div data-details="saturday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="saturday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="saturdayOrganizationDetailsText">
+                        Fırtına oluşumu ve organizasyonu için koşullar uygun değil. Hava sakin olacak.
+                    </p>
+                </div>
+            </div>
+
+            <div id="sunday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+                <div data-details="sunday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
+                    <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="sunday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="sundayEnergyDetailsText">
+                        Pazar günü için enerji seviyeleri ortalama düzeyde. Fırtına aktivitesi beklenmiyor.
+                    </p>
+                </div>
+                <div data-details="sunday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
+                    <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                </div>
+                <div id="sunday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="sundayMoistureDetailsText">
+                        Havadaki nem oranı ortalama seviyelerde. Hava genel olarak kuru olacak.
+                    </p>
+                </div>
+                <div data-details="sunday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
+                    <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="sunday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="sundayTriggerDetailsText">
+                        Pazar günü için atmosferde konveksiyonu tetikleyecek önemli bir mekanizma beklenmiyor.
+                    </p>
+                </div>
+                <div data-details="sunday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
+                    <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
+                    <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
+                    <div class="mt-4 progress-bar-container">
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                    </div>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                </div>
+                <div id="sunday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
+                    <p class="text-gray-300" data-i18n="sundayOrganizationDetailsText">
+                        Fırtına organizasyonu için gerekli koşullar uygun değil.
+                    </p>
+                </div>
+            </div>
+
+            </section>
+
         <section id="scenario" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="scenarioTitle">Senaryo Analizi</h2>
-            <p class="text-lg text-gray-300 mb-8" data-i18n="scenarioIntro">
-                Tüm bileşenlerin etkileşimini, anahtar göstergelerin bir radar grafiği üzerinde gösterimiyle analiz edin.
-            </p>
-            <div class="flex justify-center space-x-4 mb-8">
-                <button data-scenario="morning" class="scenario-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="morning">Sabah</button>
-                <button data-scenario="afternoon" class="scenario-button active px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="afternoon">Öğle</button>
-                <button data-scenario="evening" class="scenario-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="evening">Akşam</button>
-            </div>
-            <div class="flex justify-center">
-                <div class="w-full md:w-3/4 lg:w-1/2">
-                    <canvas id="radarChart"></canvas>
-                </div>
+            <div id="scenario-content" class="text-lg text-gray-300">
+                <p class="mb-4" data-i18n="scenarioText1">
+                    Fırtına bileşenlerinin kombinasyonuna dayanarak Salı günü için atmosferik bir senaryo hazırlanmıştır.
+                </p>
+                <p data-i18n="scenarioText2">
+                    - Güçlü enerji (CAPE), yüksek nem ve bir tetikleyici mekanizmanın varlığı, fırtına hücrelerinin oluşacağını gösteriyor. Görece düşük organizasyon (Bulk Shear), bu fırtınaların yerel olarak şiddetli olacağını, ancak büyük ve organize bir sistemin parçası olmayacağını düşündürüyor.
+                </p>
             </div>
         </section>
         
-        <!-- Section: Cities -->
         <section id="cities" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="citiesTitle">Şehirler ve Anlık Veriler</h2>
-            <p class="text-lg text-gray-300 mb-4" data-i18n="citiesIntro">
-                Türkiye'nin 81 şehri için oluşturulan dinamik verileri burada bulabilirsiniz. Yağış veya fırtına uyarısı olan şehirler kırmızı renkte gösterilmiştir.
-            </p>
-            <input id="citySearchInput" type="text" data-i18n-placeholder="citySearchPlaceholder" placeholder="Şehir ara..." class="w-full p-3 mb-6 rounded-xl bg-[#2d3748] text-white border border-[#00ffff] focus:outline-none focus:ring-2 focus:ring-[#00ffff] transition-all">
-            <div id="city-list-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- City cards will be dynamically added here by JavaScript -->
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="citiesTitle">Şehir Bazlı Analiz</h2>
+            <div id="city-analysis-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Bursa</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%65</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Sağladığınız verilere göre Bursa'da oraj oluşumu için yüksek potansiyel bulunmaktadır. Rüzgar yönü ve hızındaki belirgin değişiklikler, atmosferde bir cephe veya hava kütlesi değişiminin habercisi olabilir. Saat 15:00'te belirtilen vorticity (+10, +20) ve öğle saatlerinde 40'larda olan bulk shear değerleri, kuvvetli fırtına potansiyeline ve dönme hareketlerine işaret etmektedir. Nem oranının geceye doğru %70'e kadar yükselmesi de oraj için gerekli koşulları sağlamaktadır. Bu durum, özellikle öğleden sonra ve akşam saatlerinde yerel olarak kuvvetli orajların oluşabileceğini göstermektedir.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Orhaneli (Bursa)</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Orhaneli gibi dağlık bölgelerde, yüksek sıcaklık ve nemin birleşimi güçlü termik yükselimlere neden olur. Sizin verilerinizdeki 1000'e yakın CAPE değerleri ve yüksek nem oranları (%43-%70), bu coğrafi özelliklerle birleştiğinde oraj oluşumu için en ideal ortamı yaratır. Oraj ihtimali, öğleden sonra zirveye ulaşacak olup, yerel olarak şiddetli yağış, dolu ve rüzgar beklenebilir.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Balıkesir</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%60</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Balıkesir için de yüksek CAPE ve yeterli nem koşulları mevcuttur. Öğleden sonraki saatlerde 35-40'a ulaşan bulk shear değerleri ve saat 18:00'de rüzgarın 30km/s hıza ulaşması, kuvvetli konvektif hareketlerin olabileceğini düşündürmektedir. Bu durum, yerel olarak güçlü oraj hücrelerinin oluşumuna zemin hazırlamaktadır. Bursa'ya göre biraz daha düşük bir ihtimal olsa da risk devam etmektedir.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Eskişehir</h3>
+                    <p class="text-lg text-gray-300 mb-4">Salı günü oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%50</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Sağladığınız verilere göre Eskişehir'de +20, +30 gibi yüksek vorticity (dönme hareketi) değerleri bulunmaktadır. Bu durum, bölgede yüksek enerji potansiyeli ile birlikte oraj oluşumunu tetikleyebilecek hava hareketlerinin olduğunu göstermektedir. Bulk shear değerleri diğer bölgelere göre daha düşük olsa da, yüksek enerji ve vorticity, yerel olarak kuvvetli oraj riskini artırmaktadır. Öğleden sonra termik yükselimlerle birlikte kısa süreli ve yerel orajlar görülebilir.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Section: Verdict -->
         <section id="verdict" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="verdictTitle">Karar & Tavsiye</h2>
-            <p class="text-lg text-gray-300 mb-8" data-i18n="verdictIntro">
-                Analiz edilen tüm verilere dayanarak, Çarşamba gününün meteorolojik durumu için nihai kararımız ve eyleme geçirilebilir tavsiyelerimiz aşağıdadır.
-            </p>
+            <div id="verdict-content" class="text-lg text-gray-300">
+                <p class="mb-4" data-i18n="verdictText1">
+                    Tüm verilerin analizine dayanarak, özellikle Bursa ve çevresinde kuvvetli fırtına potansiyeli yüksek beklenmektedir.
+                </p>
+                <p class="mb-4" data-i18n="verdictText2">
+                    - Yüksek CAPE ve Bulk Shear değerleri olan bölgelerin özellikle takip edilmesi gerekmektedir. Kuvvetli fırtına ve şiddetli yağışlar olasıdır.
+                </p>
+                <p data-i18n="verdictText3">
+                    - Meteoroloji Genel Müdürlüğü'nün yerel hava tahminlerini takip etmeniz ve olası olumsuz hava olaylarına karşı hazırlıklı olmanız tavsiye edilir.
+                </p>
+            </div>
+        </section>
+
+        <section id="mgm" class="p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="mgmTitle">MGM Uyarıları</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-[#38ffc0] mb-2" data-i18n="verdictProbabilityTitle">Fırtına Olasılığı</h3>
-                    <p class="text-gray-400 text-lg" data-i18n="verdictProbabilityText">
-                        Genel olarak, yerel şiddetli fırtına oluşumu için olasılık <span class="font-bold text-[#ffeb3b]">{probability}</span> olarak belirlenmiştir. Bu olasılık, günün ilerleyen saatlerinde artabilir.
+                <div class="card alert bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#ff4d4d]">
+                    <h3 class="text-2xl font-bold text-[#ff4d4d] mb-2" data-i18n="mgmAlertTitle">MGM Uyarısı:</h3>
+                    <p class="text-gray-300 text-lg" data-i18n="mgmAlertText">
+                        Bursa bölgesi için kuvvetli hava olayları uyarısı yapılmıştır. Ani sağanak yağışlar, şimşek, dolu ve kuvvetli rüzgarlara karşı gerekli önlemleri alınız.
                     </p>
                 </div>
-                <div>
-                    <h3 class="text-2xl font-bold text-[#38ffc0] mb-2" data-i18n="verdictRecommendationsTitle">Tavsiyeler</h3>
-                    <ul class="list-disc list-inside text-gray-400 text-lg space-y-2">
-                        <li data-i18n="rec1">Şiddetli hava durumu uyarılarını yakından takip edin.</li>
-                        <li data-i18n="rec2">Dış mekân aktivitelerini günün ikinci yarısı için planlamayın.</li>
-                        <li data-i18n="rec3">Dolu, kuvvetli rüzgar ve ani sel baskınlarına karşı hazırlıklı olun.</li>
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748]">
+                    <h3 class="text-2xl font-bold text-[#00ffff] mb-2" data-i18n="mgmInfoTitle">Diğer Uyarılar:</h3>
+                    <ul class="list-disc list-inside text-gray-300 text-lg">
+                        <li data-i18n="mgmOtherWarning1">
+                            **Marmara Bölgesi:** Kuzeyli yönlerden kuvvetli rüzgar (30-50 km/s) beklenmektedir. Deniz ulaşımında ve dış mekan aktivitelerinde dikkatli olunmalıdır.
+                        </li>
+                        <li data-i18n="mgmOtherWarning2">
+                            **Doğu Karadeniz Kıyıları, Denizli, Kütahya, Afyonkarahisar, Eskişehir, Bolu ve Ordu Çevreleri:** Yerel sağanak ve gök gürültülü sağanak yağışlar beklenmektedir.
+                        </li>
                     </ul>
                 </div>
             </div>
         </section>
+
     </main>
+
+    <footer class="text-center text-gray-500 mt-12 text-sm">
+        <p>DJ-water © 2024</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            let radarChart = null;
-            const ctxRadar = document.getElementById('radarChart');
-            const cityListContainer = document.getElementById('city-list-container');
-            const citySearchInput = document.getElementById('citySearchInput');
-            const langSwitcher = document.getElementById('lang-switcher');
-            const langText = document.getElementById('lang-text');
-            
-            let currentLanguage = 'tr';
-
-            // All translations are defined here.
-            const translations = {
-                tr: {
-                    appTitle: 'DJ-water',
-                    appHeadline: 'DJ-water',
-                    appSubHeadline: 'Meteorolojik Senaryo Analiz Platformu',
-                    navSummary: 'Günün Özeti',
-                    navIngredients: 'Fırtına Malzemeleri',
-                    navScenario: 'Senaryo Analizi',
-                    navCities: 'Şehirler',
-                    navVerdict: 'Karar & Tavsiye',
-                    summaryTitle: 'Günün Özeti',
-                    summaryIntro: 'Çarşamba hava durumu verileri, potansiyel olarak güçlü bir fırtına gelişimi için çeşitli işaretler gösteriyor. Analizimiz, bu durumun olgunlaşma aşamasında olduğunu ve takip edilmesi gerektiğini belirtiyor.',
-                    summaryForecastTitle: 'Genel Tahmin',
-                    summaryForecastText: 'Hafif yağışlarla başlayıp, öğleden sonra yerel olarak şiddetli gök gürültülü fırtınaya dönüşme potansiyeli yüksek. En riskli bölgeler İç Anadolu ve Batı Karadeniz.',
-                    summaryRiskTitle: 'Risk Seviyesi',
-                    summaryRiskLevel: 'Orta',
-                    summaryRiskText: 'Durumun yakından takip edilmesi gerekiyor. Gelişmeler, risk seviyesini hızla yükseltebilir.',
-                    summaryLastUpdateLabel: 'Son Güncelleme:',
-                    summaryLastUpdateValue: 'Çarşamba, 12:00 UTC',
-                    ingredientsTitle: 'Fırtınanın Malzemeleri',
-                    ingredientsIntro: 'Fırtına oluşumu için gerekli olan dört ana bileşeni inceliyoruz. Her bir bileşenin gücünü ve etkisini görmek için aşağıdaki kartlara tıklayın.',
-                    energyCardTitle: 'Enerji',
-                    energyCardText: 'Ortamdaki potansiyel enerji miktarı.',
-                    energyDetailsText: 'CAPE (Convective Available Potential Energy) değerleri, atmosferin yukarı doğru hareket için ne kadar enerjiye sahip olduğunu gösterir. Çarşamba günü, özellikle öğleden sonra için CAPE değerleri yüksek seviyelerde seyrediyor, bu da güçlü dikey hava akımları ve potansiyel olarak büyük dolu tanelerinin oluşabileceği anlamına gelir.',
-                    high: 'Yüksek',
-                    moistureCardTitle: 'Nem',
-                    moistureCardText: 'Atmosferdeki su buharı miktarı.',
-                    moistureDetailsText: 'Yüzeyden 700 hPa seviyesine kadar olan hava katmanında yüksek miktarda su buharı mevcut. Bu nem, fırtınanın gelişimini destekleyecek ve şiddetli yağışlara zemin hazırlayacaktır. Karadeniz üzerinden gelen nemli hava akışı, bu durumu pekiştiriyor.',
-                    sufficient: 'Yeterli',
-                    triggerCardTitle: 'Tetikleyici',
-                    triggerCardText: 'Hava hareketini başlatan mekanizma.',
-                    triggerDetailsText: 'Bölgeden geçen bir kısa dalga (shortwave trough) ve yüzeyde oluşan konverjans hatları, atmosferi yukarı doğru iterek konvektif hareketi başlatmak için yeterli tetikleyiciyi sağlıyor. Bu mekanizmalar, mevcut enerji ve nemi kullanarak fırtınanın oluşumuna yol açacaktır.',
-                    present: 'Mevcut',
-                    organizationCardTitle: 'Organizasyon',
-                    organizationCardText: 'Fırtına sisteminin yapısı.',
-                    organizationDetailsText: 'Şimdilik fırtına hücrelerinin organize bir sistem (örneğin bir süper hücre) oluşturma potansiyeli düşük görünüyor. Rüzgar kesmesi (shear) değerleri, organize bir yapı için yeterli değil. Ancak, bu durumun takip edilmesi gerekiyor.',
-                    weak: 'Zayıf',
-                    scenarioTitle: 'Senaryo Analizi',
-                    scenarioIntro: 'Tüm bileşenlerin etkileşimini, anahtar göstergelerin bir radar grafiği üzerinde gösterimiyle analiz edin.',
-                    morning: 'Sabah',
-                    afternoon: 'Öğle',
-                    evening: 'Akşam',
-                    citiesTitle: 'Şehirler ve Anlık Veriler',
-                    citiesIntro: 'Türkiye\'nin 81 şehri için oluşturulan dinamik verileri burada bulabilirsiniz. Yağış veya fırtına uyarısı olan şehirler kırmızı renkte gösterilmiştir.',
-                    citySearchPlaceholder: 'Şehir ara...',
-                    verdictTitle: 'Karar & Tavsiye',
-                    verdictIntro: 'Analiz edilen tüm verilere dayanarak, Çarşamba gününün meteorolojik durumu için nihai kararımız ve eyleme geçirilebilir tavsiyelerimiz aşağıdadır.',
-                    verdictProbabilityTitle: 'Fırtına Olasılığı',
-                    verdictProbabilityText: 'Genel olarak, yerel şiddetli fırtına oluşumu için olasılık <span class="font-bold text-[#ffeb3b]">{probability}</span> olarak belirlenmiştir. Bu olasılık, günün ilerleyen saatlerinde artabilir.',
-                    verdictRecommendationsTitle: 'Tavsiyeler',
-                    rec1: 'Şiddetli hava durumu uyarılarını yakından takip edin.',
-                    rec2: 'Dış mekân aktivitelerini günün ikinci yarısı için planlamayın.',
-                    rec3: 'Dolu, kuvvetli rüzgar ve ani sel baskınlarına karşı hazırlıklı olun.',
-                    // City card translations
-                    mgmWarningPrefix: 'MGM Uyarısı: ',
-                    alertWarning: 'Uyarısı',
-                    alertIntro: 'Bu uyarı, Meteoroloji Genel Müdürlüğü tarafından yapılan simüle edilmiş bir uyarıya dayanmaktadır. Gerçek hava durumu için resmi kaynakları takip ediniz.',
-                    dataIntro: 'Bu şehre özel anlık veriler:',
-                    tempLabel: 'Sıcaklık:',
-                    humidityLabel: 'Nem:',
-                    windLabel: 'Rüzgar:',
-                    detailedReportButton: '✨ Detaylı Rapor Oluştur',
-                    reportGenerating: 'Rapor oluşturuluyor...',
-                    reportError: 'Rapor oluşturulamadı: Yapay zeka yanıt veremedi.',
-                    fetchError: 'Hata oluştu: Rapor oluşturulurken bir sorunla karşılaşıldı. Lütfen tekrar deneyin.',
-                    statusSunny: 'Sıcak ve güneşli',
-                    statusCloudy: 'Nemli ve bulutlu',
-                    statusWindy: 'Rüzgarlı',
-                    statusRain: 'Yağış bekleniyor',
-                    statusNormal: 'Normal',
-                    warningTextRain: "Şehirde yerel sağanak ve gök gürültülü sağanak yağış bekleniyor. Ani sel, dolu ve fırtına riskine karşı dikkatli olunmalıdır.",
-                    warningTextHot: "Mevsim normallerinin üzerinde seyreden yüksek sıcaklıklar nedeniyle dikkatli olunmalıdır.",
-                },
-                en: {
-                    appTitle: 'DJ-water',
-                    appHeadline: 'DJ-water',
-                    appSubHeadline: 'Meteorological Scenario Analysis Platform',
-                    navSummary: 'Daily Summary',
-                    navIngredients: 'Storm Ingredients',
-                    navScenario: 'Scenario Analysis',
-                    navCities: 'Cities',
-                    navVerdict: 'Verdict & Advice',
-                    summaryTitle: 'Daily Summary',
-                    summaryIntro: 'Wednesday\'s weather data shows various signs for the potential development of a powerful storm. Our analysis indicates that this situation is in a maturing phase and requires monitoring.',
-                    summaryForecastTitle: 'General Forecast',
-                    summaryForecastText: 'Potential for a local severe thunderstorm to develop in the afternoon, starting with light precipitation. The most at-risk regions are Central Anatolia and the Western Black Sea.',
-                    summaryRiskTitle: 'Risk Level',
-                    summaryRiskLevel: 'Moderate',
-                    summaryRiskText: 'The situation needs to be closely monitored. Developments could rapidly increase the risk level.',
-                    summaryLastUpdateLabel: 'Last Update:',
-                    summaryLastUpdateValue: 'Wednesday, 12:00 UTC',
-                    ingredientsTitle: 'Storm Ingredients',
-                    ingredientsIntro: 'We are analyzing the four main components necessary for storm formation. Click on the cards below to see the strength and impact of each component.',
-                    energyCardTitle: 'Energy',
-                    energyCardText: 'Amount of potential energy in the atmosphere.',
-                    energyDetailsText: 'CAPE (Convective Available Potential Energy) values indicate how much energy the atmosphere has for upward movement. For Wednesday, especially in the afternoon, CAPE values are at high levels, which means strong vertical air currents and potentially large hailstones can form.',
-                    high: 'High',
-                    moistureCardTitle: 'Moisture',
-                    moistureCardText: 'Amount of water vapor in the atmosphere.',
-                    moistureDetailsText: 'A high amount of water vapor is present in the air layer from the surface up to the 700 hPa level. This moisture will support the development of the storm and pave the way for heavy rainfall. The humid air flow coming from over the Black Sea reinforces this situation.',
-                    sufficient: 'Sufficient',
-                    triggerCardTitle: 'Trigger',
-                    triggerCardText: 'Mechanism that initiates air movement.',
-                    triggerDetailsText: 'A shortwave trough passing through the region and convergence lines forming on the surface provide a sufficient trigger to initiate convective movement by pushing the atmosphere upwards. These mechanisms will lead to the formation of the storm by using the available energy and moisture.',
-                    present: 'Present',
-                    organizationCardTitle: 'Organization',
-                    organizationCardText: 'Structure of the storm system.',
-                    organizationDetailsText: 'For now, the potential for storm cells to form an organized system (e.g., a supercell) seems low. Wind shear values are not sufficient for an organized structure. However, this situation needs to be monitored.',
-                    weak: 'Weak',
-                    scenarioTitle: 'Scenario Analysis',
-                    scenarioIntro: 'Analyze the interaction of all components, shown on a radar chart of key indicators.',
-                    morning: 'Morning',
-                    afternoon: 'Afternoon',
-                    evening: 'Evening',
-                    citiesTitle: 'Cities and Live Data',
-                    citiesIntro: 'Here you can find dynamically generated data for 81 cities in Turkey. Cities with rain or storm warnings are shown in red.',
-                    citySearchPlaceholder: 'Search for a city...',
-                    verdictTitle: 'Verdict & Advice',
-                    verdictIntro: 'Based on all the analyzed data, our final verdict and actionable recommendations for Wednesday\'s meteorological situation are below.',
-                    verdictProbabilityTitle: 'Storm Probability',
-                    verdictProbabilityText: 'Overall, the probability for the formation of a local severe storm is determined to be <span class="font-bold text-[#ffeb3b]">{probability}</span>. This probability may increase in the later hours of the day.',
-                    verdictRecommendationsTitle: 'Recommendations',
-                    rec1: 'Closely follow severe weather alerts.',
-                    rec2: 'Do not plan outdoor activities for the second half of the day.',
-                    rec3: 'Be prepared for hail, strong winds, and flash floods.',
-                    // City card translations
-                    mgmWarningPrefix: 'MGM Alert: ',
-                    alertWarning: 'Alert',
-                    alertIntro: 'This alert is based on a simulated warning from the General Directorate of Meteorology. Please follow official sources for real weather conditions.',
-                    dataIntro: 'Live data specific to this city:',
-                    tempLabel: 'Temperature:',
-                    humidityLabel: 'Humidity:',
-                    windLabel: 'Wind:',
-                    detailedReportButton: '✨ Generate Detailed Report',
-                    reportGenerating: 'Generating report...',
-                    reportError: 'Could not generate report: AI did not respond.',
-                    fetchError: 'An error occurred: There was a problem generating the report. Please try again.',
-                    statusSunny: 'Hot and sunny',
-                    statusCloudy: 'Humid and cloudy',
-                    statusWindy: 'Windy',
-                    statusRain: 'Rain expected',
-                    statusNormal: 'Normal',
-                    warningTextRain: "Local showers and thunderstorms are expected in the city. Caution should be exercised against the risk of flash floods, hail, and strong winds.",
-                    warningTextHot: "Caution should be exercised due to high temperatures above seasonal norms.",
-                }
-            };
-            
-            // Function to translate the page
-            function translatePage(lang) {
-                document.documentElement.lang = lang;
-                currentLanguage = lang;
-                const elements = document.querySelectorAll('[data-i18n]');
-                elements.forEach(element => {
-                    const key = element.dataset.i18n;
-                    if (translations[lang] && translations[lang][key]) {
-                        element.textContent = translations[lang][key];
-                    }
-                });
-
-                const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
-                placeholders.forEach(element => {
-                    const key = element.dataset.i18nPlaceholder;
-                    if (translations[lang] && translations[lang][key]) {
-                        element.placeholder = translations[lang][key];
-                    }
-                });
-                
-                // Special case for the probability text with a variable
-                const verdictProbabilityText = document.querySelector('[data-i18n="verdictProbabilityText"]');
-                const probability = 70; // Hardcoded for this example
-                if (verdictProbabilityText) {
-                    verdictProbabilityText.innerHTML = translations[lang].verdictProbabilityText.replace('{probability}', `<span class="font-bold text-[#ffeb3b]">${probability}%</span>`);
-                }
-                
-                // Re-render city cards with the new language
-                renderCityCards(cityData);
-            }
-
-            // Language switcher button logic
-            langSwitcher.addEventListener('click', () => {
-                const newLang = currentLanguage === 'tr' ? 'en' : 'tr';
-                langText.textContent = newLang.toUpperCase();
-                translatePage(newLang);
-            });
-
-            // Radar chart data and functions remain the same
-            const radarData = {
-                morning: { labelKey: 'morning', data: [40, 60, 50, 20], borderColor: '#ffeb3b' },
-                afternoon: { labelKey: 'afternoon', data: [85, 90, 75, 40], borderColor: '#00ffff' },
-                evening: { labelKey: 'evening', data: [70, 80, 60, 30], borderColor: '#ff4d4d' }
-            };
-            
-            function createRadarGradient() {
-                if (!ctxRadar) return 'rgba(0, 255, 255, 0.2)';
-                const width = ctxRadar.clientWidth;
-                const height = ctxRadar.clientHeight;
-                if (width === 0 || height === 0) return 'rgba(0, 255, 255, 0.2)';
-                const ctx = ctxRadar.getContext('2d');
-                const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width / 2);
-                gradient.addColorStop(0, 'rgba(0, 255, 255, 0.5)');
-                gradient.addColorStop(0.5, 'rgba(0, 255, 255, 0.2)');
-                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                return gradient;
-            }
-            
-            function initializeRadarChart(scenarioKey) {
-                const data = radarData[scenarioKey];
-                if (radarChart) radarChart.destroy();
-                if (ctxRadar) {
-                    const dynamicGradient = createRadarGradient();
-                    radarChart = new Chart(ctxRadar, {
-                        type: 'radar',
-                        data: {
-                            labels: [translations[currentLanguage].energyCardTitle, translations[currentLanguage].moistureCardTitle, translations[currentLanguage].triggerCardTitle, translations[currentLanguage].organizationCardTitle],
-                            datasets: [{
-                                label: translations[currentLanguage][data.labelKey],
-                                data: data.data,
-                                borderColor: data.borderColor,
-                                backgroundColor: dynamicGradient,
-                                pointBackgroundColor: '#38ffc0',
-                                pointBorderColor: '#0d1117',
-                                pointHoverBackgroundColor: '#0d1117',
-                                pointHoverBorderColor: '#38ffc0',
-                                borderWidth: 2,
-                                fill: true,
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { legend: { display: false } },
-                            scales: {
-                                r: {
-                                    angleLines: { color: '#2d3748' },
-                                    grid: { color: '#2d3748' },
-                                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#ffffff' },
-                                    suggestedMin: 0, suggestedMax: 100, ticks: { display: false, backdropColor: 'transparent' },
-                                    backgroundColor: '#1a202c',
-                                }
-                            },
-                            elements: {
-                                line: { tension: 0.1 },
-                                point: { radius: 5, borderWidth: 2 }
-                            }
-                        }
-                    });
-                }
-            }
-
-            initializeRadarChart('afternoon');
-
-            const scenarioButtons = document.querySelectorAll('.scenario-button');
-            scenarioButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    scenarioButtons.forEach(btn => btn.classList.remove('active', 'bg-[#00ffff]', 'text-[#0d1117]'));
-                    scenarioButtons.forEach(btn => btn.classList.add('bg-[#2d3748]', 'text-gray-300'));
-                    button.classList.add('active', 'bg-[#00ffff]', 'text-[#0d1117]');
-                    const scenario = button.dataset.scenario;
-                    initializeRadarChart(scenario);
-                });
-            });
-
-            // Gerçekçi verilere dayalı şehir listesi ve hava durumu bilgileri
-            const cityData = [
-                { name: "Adana", temp: 35, humidity: 65, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Adıyaman", temp: 38, humidity: 45, windSpeed: 8, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Afyonkarahisar", temp: 31, humidity: 50, windSpeed: 12, windDirection: "Batı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Ağrı", temp: 28, humidity: 40, windSpeed: 5, windDirection: "Kuzeydoğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Amasya", temp: 34, humidity: 55, windSpeed: 7, windDirection: "Kuzey", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Ankara", temp: 33, humidity: 55, windSpeed: 15, windDirection: "Güneybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Antalya", temp: 31, humidity: 70, windSpeed: 10, windDirection: "Güney", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Artvin", temp: 29, humidity: 75, windSpeed: 10, windDirection: "Kuzeybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Aydın", temp: 38, humidity: 40, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Balıkesir", temp: 32, humidity: 60, windSpeed: 18, windDirection: "Kuzeybatı", statusKey: "statusWindy", isAlert: false, alertTypeKey: null },
-                { name: "Bilecik", temp: 30, humidity: 65, windSpeed: 12, windDirection: "Kuzey", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Bingöl", temp: 36, humidity: 30, windSpeed: 6, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Bitlis", temp: 32, humidity: 35, windSpeed: 8, windDirection: "Güneydoğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Bolu", temp: 28, humidity: 80, windSpeed: 10, windDirection: "Batı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Burdur", temp: 34, humidity: 55, windSpeed: 11, windDirection: "Güney", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Bursa", temp: 31, humidity: 60, windSpeed: 13, windDirection: "Kuzeybatı", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Çanakkale", temp: 30, humidity: 70, windSpeed: 20, windDirection: "Kuzey", statusKey: "statusWindy", isAlert: false, alertTypeKey: null },
-                { name: "Çankırı", temp: 33, humidity: 50, windSpeed: 14, windDirection: "Kuzeybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Çorum", temp: 35, humidity: 48, windSpeed: 9, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Denizli", temp: 37, humidity: 45, windSpeed: 12, windDirection: "Güney", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Diyarbakır", temp: 41, humidity: 30, windSpeed: 7, windDirection: "Güney", statusKey: "statusSunny", isAlert: true, alertTypeKey: "warningTextHot" },
-                { name: "Edirne", temp: 35, humidity: 60, windSpeed: 15, windDirection: "Kuzey", statusKey: "statusWindy", isAlert: false, alertTypeKey: null },
-                { name: "Elazığ", temp: 38, humidity: 40, windSpeed: 8, windDirection: "Kuzeydoğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Erzincan", temp: 32, humidity: 50, windSpeed: 6, windDirection: "Doğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Erzurum", temp: 35, humidity: 40, windSpeed: 9, windDirection: "Batı", statusKey: "statusSunny", isAlert: true, alertTypeKey: "warningTextHot" },
-                { name: "Eskişehir", temp: 32, humidity: 55, windSpeed: 13, windDirection: "Kuzeybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Gaziantep", temp: 37, humidity: 40, windSpeed: 10, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Giresun", temp: 28, humidity: 85, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Gümüşhane", temp: 30, humidity: 60, windSpeed: 7, windDirection: "Doğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Hakkari", temp: 30, humidity: 40, windSpeed: 5, windDirection: "Güneydoğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Hatay", temp: 31, humidity: 70, windSpeed: 15, windDirection: "Güneybatı", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Isparta", temp: 33, humidity: 50, windSpeed: 11, windDirection: "Kuzey", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Mersin", temp: 34, humidity: 75, windSpeed: 12, windDirection: "Güney", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "İstanbul", temp: 31, humidity: 68, windSpeed: 25, windDirection: "Kuzeydoğu", statusKey: "statusWindy", isAlert: true, alertTypeKey: "warningTextWindy" },
-                { name: "İzmir", temp: 35, humidity: 50, windSpeed: 18, windDirection: "Kuzeybatı", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Kars", temp: 26, humidity: 55, windSpeed: 8, windDirection: "Kuzeydoğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Kastamonu", temp: 29, humidity: 65, windSpeed: 10, windDirection: "Batı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Kayseri", temp: 36, humidity: 40, windSpeed: 9, windDirection: "Güneybatı", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Kırklareli", temp: 36, humidity: 55, windSpeed: 16, windDirection: "Kuzey", statusKey: "statusWindy", isAlert: false, alertTypeKey: null },
-                { name: "Kırşehir", temp: 34, humidity: 50, windSpeed: 10, windDirection: "Güney", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Kocaeli", temp: 30, humidity: 70, windSpeed: 14, windDirection: "Kuzeydoğu", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Konya", temp: 32, humidity: 45, windSpeed: 10, windDirection: "Batı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Kütahya", temp: 31, humidity: 55, windSpeed: 12, windDirection: "Güneybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Malatya", temp: 40, humidity: 30, windSpeed: 7, windDirection: "Güneydoğu", statusKey: "statusSunny", isAlert: true, alertTypeKey: "warningTextHot" },
-                { name: "Manisa", temp: 37, humidity: 45, windSpeed: 15, windDirection: "Kuzey", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Kahramanmaraş", temp: 39, humidity: 40, windSpeed: 8, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Mardin", temp: 38, humidity: 35, windSpeed: 6, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Muğla", temp: 36, humidity: 50, windSpeed: 12, windDirection: "Kuzeybatı", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Muş", temp: 34, humidity: 30, windSpeed: 5, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Nevşehir", temp: 30, humidity: 60, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Niğde", temp: 31, humidity: 55, windSpeed: 8, windDirection: "Güney", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Ordu", temp: 28, humidity: 80, windSpeed: 10, windDirection: "Kuzeydoğu", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Rize", temp: 27, humidity: 85, windSpeed: 9, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Sakarya", temp: 30, humidity: 75, windSpeed: 15, windDirection: "Kuzeydoğu", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Samsun", temp: 30, humidity: 80, windSpeed: 11, windDirection: "Doğu", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Siirt", temp: 37, humidity: 35, windSpeed: 6, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Sinop", temp: 29, humidity: 70, windSpeed: 14, windDirection: "Kuzey", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Sivas", temp: 33, humidity: 50, windSpeed: 9, windDirection: "Batı", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Tekirdağ", temp: 32, humidity: 65, windSpeed: 18, windDirection: "Kuzey", statusKey: "statusWindy", isAlert: false, alertTypeKey: null },
-                { name: "Tokat", temp: 34, humidity: 55, windSpeed: 8, windDirection: "Kuzeybatı", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Trabzon", temp: 27, humidity: 85, windSpeed: 10, windDirection: "Doğu", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Tunceli", temp: 36, humidity: 40, windSpeed: 7, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Şanlıurfa", temp: 40, humidity: 30, windSpeed: 9, windDirection: "Güneybatı", statusKey: "statusSunny", isAlert: true, alertTypeKey: "warningTextHot" },
-                { name: "Uşak", temp: 35, humidity: 45, windSpeed: 11, windDirection: "Kuzey", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Van", temp: 28, humidity: 45, windSpeed: 6, windDirection: "Doğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Yozgat", temp: 32, humidity: 55, windSpeed: 8, windDirection: "Batı", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Zonguldak", temp: 27, humidity: 80, windSpeed: 15, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Aksaray", temp: 34, humidity: 50, windSpeed: 10, windDirection: "Güney", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Bayburt", temp: 29, humidity: 60, windSpeed: 7, windDirection: "Doğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Karaman", temp: 33, humidity: 45, windSpeed: 9, windDirection: "Kuzey", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Kırıkkale", temp: 34, humidity: 50, windSpeed: 13, windDirection: "Kuzeybatı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Batman", temp: 39, humidity: 35, windSpeed: 8, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Şırnak", temp: 35, humidity: 30, windSpeed: 6, windDirection: "Güneydoğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Bartın", temp: 28, humidity: 75, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Ardahan", temp: 26, humidity: 50, windSpeed: 7, windDirection: "Kuzeydoğu", statusKey: "statusNormal", isAlert: false, alertTypeKey: null },
-                { name: "Iğdır", temp: 38, humidity: 30, windSpeed: 5, windDirection: "Doğu", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Yalova", temp: 30, humidity: 70, windSpeed: 12, windDirection: "Kuzeybatı", statusKey: "statusCloudy", isAlert: false, alertTypeKey: null },
-                { name: "Karabük", temp: 29, humidity: 65, windSpeed: 11, windDirection: "Batı", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" },
-                { name: "Kilis", temp: 39, humidity: 40, windSpeed: 9, windDirection: "Güney", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Osmaniye", temp: 37, humidity: 60, windSpeed: 10, windDirection: "Kuzey", statusKey: "statusSunny", isAlert: false, alertTypeKey: null },
-                { name: "Düzce", temp: 28, humidity: 80, windSpeed: 12, windDirection: "Kuzeydoğu", statusKey: "statusRain", isAlert: true, alertTypeKey: "warningTextRain" }
-            ];
-            
-            async function generateDetailedReport(city, data) {
-                const reportElement = document.getElementById(`gemini-report-${city.replace(/\s/g, '-')}`);
-                const button = document.getElementById(`gemini-button-${city.replace(/\s/g, '-')}`);
-                
-                if (reportElement) {
-                    reportElement.innerHTML = `<div class="flex items-center space-x-2 text-cyan-400"><div class="loader"></div><span>${translations[currentLanguage].reportGenerating}</span></div>`;
-                }
-                if (button) {
-                    button.disabled = true;
-                    button.classList.add('opacity-50', 'cursor-not-allowed');
-                }
-
-                const prompt = currentLanguage === 'en' 
-                    ? `Act as a professional meteorologist. Provide a detailed weather forecast and potential risks for the city of ${city} based on the following data: - Current Status: ${data.status} - Temperature: ${data.temperature}°C - Humidity: ${data.humidity}% - Wind: ${data.windSpeed} km/h from ${data.windDirection}. Keep the response concise, professional, and in English.`
-                    : `Profesyonel bir meteorolog gibi davran. Aşağıdaki verilere dayanarak ${city} şehri için detaylı bir hava durumu tahmini ve potansiyel riskleri içeren bir rapor hazırla: - Anlık Durum: ${data.status} - Sıcaklık: ${data.temperature}°C - Nem: ${data.humidity}% - Rüzgar: ${data.windSpeed} km/h, yönü: ${data.windDirection}. Raporu kısa, profesyonel ve Türkçe olarak hazırla.`;
-
-                try {
-                    let chatHistory = [];
-                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                    const payload = { contents: chatHistory };
-                    const apiKey = "";
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    if (!response.ok) { throw new Error(`API returned an error: ${response.status} ${response.statusText}`); }
-                    const result = await response.json();
-                    
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        reportElement.innerHTML = `<p class="text-gray-300 whitespace-pre-wrap">${text}</p>`;
-                    } else {
-                        reportElement.innerHTML = `<p class="text-red-400">${translations[currentLanguage].reportError}</p>`;
-                    }
-                } catch (error) {
-                    console.error("Error generating report:", error);
-                    reportElement.innerHTML = `<p class="text-red-400">${translations[currentLanguage].fetchError}</p>`;
-                } finally {
-                    if (button) {
-                        button.disabled = false;
-                        button.classList.remove('opacity-50', 'cursor-not-allowed');
-                    }
-                }
-            }
-            
-            function renderCityCards(citiesToRender) {
-                cityListContainer.innerHTML = '';
-                citiesToRender.forEach(city => {
-                    const card = document.createElement('div');
-                    const detailsId = `city-details-${city.name.replace(/\s/g, '-')}`;
-                    card.dataset.details = detailsId;
-                    card.className = `card bg-[#1a202c] p-4 rounded-xl shadow-lg border border-[#2d3748] hover:border-[#00ffff] cursor-pointer ${city.isAlert ? 'alert' : ''}`;
-                    
-                    let statusText = translations[currentLanguage][city.statusKey] || city.statusKey;
-                    let alertType = city.isAlert ? translations[currentLanguage][city.alertTypeKey] : '';
-
-                    card.innerHTML = `
-                        <h3 class="text-xl font-bold text-[#62d9ff] mb-1">${city.name}</h3>
-                        <p class="text-gray-400 text-sm">${city.isAlert ? `${translations[currentLanguage].mgmWarningPrefix} ${alertType}` : statusText}</p>
-                    `;
-                    
-                    const detailsElement = document.createElement('div');
-                    detailsElement.id = detailsId;
-                    detailsElement.className = 'card-details bg-[#2d3748] rounded-2xl mt-4 p-4';
-                    
-                    if (city.isAlert) {
-                        detailsElement.innerHTML = `
-                            <div class="flex items-center text-red-400 mb-4 animate-pulse">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.332 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
-                                <span class="font-bold text-lg">${alertType} ${translations[currentLanguage].alertWarning}</span>
-                            </div>
-                            <p class="text-gray-300 mb-4">${translations[currentLanguage][city.alertTypeKey]}</p>
-                            <p class="text-xs text-gray-500">${translations[currentLanguage].alertIntro}</p>
-                        `;
-                    } else {
-                        detailsElement.innerHTML = `
-                            <p class="text-gray-300 mb-4">${translations[currentLanguage].dataIntro}</p>
-                            <div class="flex flex-col sm:flex-row justify-around text-center mb-4 text-sm">
-                                <div><span class="font-bold text-[#38ffc0]">${translations[currentLanguage].tempLabel}</span> ${city.temp}°C</div>
-                                <div><span class="font-bold text-[#38ffc0]">${translations[currentLanguage].humidityLabel}</span> ${city.humidity}%</div>
-                                <div><span class="font-bold text-[#38ffc0]">${translations[currentLanguage].windLabel}</span> ${city.windSpeed} km/h (${city.windDirection})</div>
-                            </div>
-                            <canvas id="cityChart-${city.name.replace(/\s/g, '-')}" class="w-full h-32 mb-4"></canvas>
-                            <button id="gemini-button-${city.name.replace(/\s/g, '-')}" class="w-full p-2 rounded-xl font-bold bg-purple-500 text-white hover:bg-purple-600 transition-all">
-                                ✨ ${translations[currentLanguage].detailedReportButton}
-                            </button>
-                            <div id="gemini-report-${city.name.replace(/\s/g, '-')}" class="mt-4 p-4 bg-[#1a202c] rounded-xl text-sm italic">
-                                <!-- AI report will be displayed here -->
-                            </div>
-                        `;
-
-                        setTimeout(() => {
-                            const ctxCity = document.getElementById(`cityChart-${city.name.replace(/\s/g, '-')}`);
-                            if (ctxCity) {
-                                new Chart(ctxCity, {
-                                    type: 'line',
-                                    data: {
-                                        labels: ['09:00', '12:00', '15:00', '18:00', '21:00'],
-                                        datasets: [{
-                                            label: translations[currentLanguage].tempLabel,
-                                            data: [city.temp - 3, city.temp, city.temp - 2, city.temp - 4, city.temp - 6],
-                                            borderColor: '#00ffff',
-                                            tension: 0.4,
-                                            fill: false,
-                                            pointRadius: 3,
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-                                        scales: {
-                                            x: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: 'white' } },
-                                            y: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: 'white' } }
-                                        }
-                                    }
-                                });
-                            }
-                        }, 100);
-                    }
-
-                    const container = document.createElement('div');
-                    container.appendChild(card);
-                    container.appendChild(detailsElement);
-                    cityListContainer.appendChild(container);
-
-                    if (!city.isAlert) {
-                        const geminiButton = document.getElementById(`gemini-button-${city.name.replace(/\s/g, '-')}`);
-                        geminiButton.addEventListener('click', () => {
-                            generateDetailedReport(city.name, {
-                                status: translations[currentLanguage][city.statusKey],
-                                temperature: city.temp,
-                                humidity: city.humidity,
-                                windSpeed: city.windSpeed,
-                                windDirection: city.windDirection
-                            });
-                        });
-                    }
-                });
-            }
-
-            // Show all cities on initial load
-            renderCityCards(cityData);
-            
-            citySearchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const filteredCities = cityData.filter(city => city.name.toLowerCase().includes(searchTerm));
-                renderCityCards(filteredCities);
-            });
-
             const navButtons = document.querySelectorAll('.nav-button');
-            const contentSections = document.querySelectorAll('.content-section');
+            const sections = document.querySelectorAll('.content-section');
+            const cardHeaders = document.querySelectorAll('.card');
+
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    contentSections.forEach(section => section.classList.remove('active'));
+
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        section.style.display = 'none';
+                    });
+
                     const target = document.getElementById(button.dataset.target);
                     if (target) {
-                        target.classList.add('active');
+                        target.style.display = 'block';
+                        setTimeout(() => target.classList.add('active'), 10);
                     }
                 });
             });
 
-            document.addEventListener('click', (event) => {
-                const card = event.target.closest('.card');
-                if (card) {
-                    const detailsId = card.dataset.details;
-                    const detailsElement = document.getElementById(detailsId);
-                    if (detailsElement) {
-                        document.querySelectorAll('.card-details.open').forEach(openDetails => {
-                            if (openDetails.id !== detailsId) {
-                                openDetails.classList.remove('open');
-                            }
+            cardHeaders.forEach(card => {
+                const detailsId = card.dataset.details;
+                if (detailsId) {
+                    const details = document.getElementById(detailsId);
+                    if (details) {
+                        card.addEventListener('click', () => {
+                            details.classList.toggle('open');
                         });
-                        detailsElement.classList.toggle('open');
                     }
                 }
             });
-            
-            // Set initial language
-            translatePage(currentLanguage);
+
+            // Ingredients tab day selector logic
+            const ingredientsDayButtons = document.querySelectorAll('.ingredients-day-button');
+            const ingredientsContentSections = document.querySelectorAll('.ingredients-content-section');
+
+            ingredientsDayButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    ingredientsDayButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to the clicked button
+                    button.classList.add('active');
+
+                    // Hide all content sections
+                    ingredientsContentSections.forEach(section => {
+                        section.style.display = 'none';
+                        section.classList.remove('active');
+                    });
+
+                    // Show the target content section
+                    const targetContent = document.getElementById(button.dataset.target);
+                    if (targetContent) {
+                        targetContent.style.display = 'grid';
+                        setTimeout(() => targetContent.classList.add('active'), 10);
+                    }
+                });
+            });
+
+            // Initial state for ingredients tab
+            const initialDayButton = document.querySelector('.ingredients-day-button.active');
+            if (initialDayButton) {
+                const initialContent = document.getElementById(initialDayButton.dataset.target);
+                if (initialContent) {
+                    initialContent.style.display = 'grid';
+                    initialContent.classList.add('active');
+                }
+            }
+
+            // Language switcher logic
+            const langSwitcher = document.getElementById('lang-switcher');
+            const langText = document.getElementById('lang-text'); 
+            const currentLang = 'tr'; // Assuming Turkish is the default based on user prompt
+
+            langSwitcher.addEventListener('click', () => {
+                const newLang = langText.textContent === 'TR' ? 'EN' : 'TR';
+                langText.textContent = newLang;
+                // Add logic here to change the language of the page content
+                // For example, by updating text based on data-i18n attributes
+            });
+
         });
     </script>
 </body>
 </html>
-
