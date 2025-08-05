@@ -177,38 +177,36 @@
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="summaryTitle">Günlük Özet</h2>
             <div id="summary-cards" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
-                    <h3 class="text-2xl font-bold neon-text mb-2" data-i18n="summaryTuesdayForecastTitle">Salı Tahmini</h3>
-                    <p class="text-lg text-gray-300 mb-4" data-i18n="summaryTuesdayIntro">
-                        Verilere göre, Salı günü özellikle Bursa ve Balıkesir'de öğleden sonra ve akşam saatlerinde yerel kuvvetli orajların oluşma ihtimali bulunmaktadır. Oraj oluşumu için gerekli enerji (CAPE) ve nem seviyeleri yüksektir.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryRiskTitle">Risk Seviyesi</h4>
-                            <span class="text-4xl font-bold text-[#ffeb3b]" data-i18n="summaryRiskLevelModerate">Orta</span>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryProbabilityTitle">İhtimal</h4>
-                            <span class="text-4xl font-bold text-[#ffeb3b]">60%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
                     <h3 class="text-2xl font-bold neon-text mb-2" data-i18n="summaryWednesdayForecastTitle">Çarşamba Tahmini</h3>
                     <p class="text-lg text-gray-300 mb-4" data-i18n="summaryWednesdayIntro">
                         Çarşamba günü hava durumu verileri, güçlü bir fırtına gelişimi için çeşitli işaretler gösteriyor. Analizlerimiz, bu durumun olgunlaşma aşamasında olduğunu ve takip edilmesi gerektiğini belirtiyor.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryForecastTitle">Genel Tahmin</h4>
-                            <p class="text-gray-400" data-i18n="summaryForecastText">
-                                Öğleden sonra başlayacak hafif yağışlarla birlikte yerel kuvvetli oraj gelişme potansiyeli mevcut. En çok risk altında olan bölgeler İç Anadolu ve Batı Karadeniz.
-                            </p>
-                        </div>
-                        <div>
                             <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryRiskTitle">Risk Seviyesi</h4>
                             <div class="flex items-center space-x-4">
                                 <span class="text-4xl font-bold text-[#ffeb3b]" data-i18n="summaryRiskLevelHigh">Yüksek</span>
                             </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryProbabilityTitle">İhtimal</h4>
+                            <span class="text-4xl font-bold text-[#ffeb3b]">80%</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b] transition-colors duration-200">
+                    <h3 class="text-2xl font-bold neon-text mb-2" data-i18n="summaryThursdayForecastTitle">Perşembe Tahmini</h3>
+                    <p class="text-lg text-gray-300 mb-4" data-i18n="summaryThursdayIntro">
+                        Perşembe günü, fırtına sisteminin etkileri kuzeybatı kesimlerde hafifleyerek devam edebilir. Özellikle Kocaeli ve Sakarya hattında sabah saatlerinde yerel yağış geçişleri gözlemlenebilir.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryRiskTitle">Risk Seviyesi</h4>
+                            <span class="text-4xl font-bold text-[#38ffc0]" data-i18n="summaryRiskLevelLow">Düşük</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-[#00ffff] mb-1" data-i18n="summaryProbabilityTitle">İhtimal</h4>
+                            <span class="text-4xl font-bold text-[#38ffc0]">30%</span>
                         </div>
                     </div>
                 </div>
@@ -219,13 +217,13 @@
                     <path fill-rule="evenodd" d="M8.257 3.327a1.5 1.5 0 012.486 0l7.25 12.5a1.5 1.5 0 01-1.243 2.173H2.25a1.5 1.5 0 01-1.243-2.173l7.25-12.5zM10 8a1 1 0 011 1v4a1 1 0 11-2 0V9a1 1 0 011-1zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                 </svg>
                 <p data-i18n="summaryWednesdayToThursdayAlert">
-                    Çarşambayı Perşembeye bağlayan gece fırtına çok güçlenebilir.
+                    Çarşamba günü ve Perşembe sabahı fırtına riski devam ediyor.
                 </p>
             </div>
 
             <div class="bg-gray-800 p-4 rounded-xl text-gray-300 mt-8">
                 <p class="font-bold" data-i18n="summaryLastUpdateLabel">Son Güncelleme:</p>
-                <p data-i18n="summaryLastUpdateValue">Salı, 15:00 UTC</p>
+                <p data-i18n="summaryLastUpdateValue">Salı, 23:20 UTC</p>
             </div>
         </section>
 
@@ -237,8 +235,8 @@
 
             <div id="ingredients-selector" class="flex flex-wrap justify-center gap-4 mb-8">
                 <button data-target="monday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="monday">Pazartesi</button>
-                <button data-target="tuesday-ingredients-content" class="ingredients-day-button active px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="tuesday">Salı</button>
-                <button data-target="wednesday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="wednesday">Çarşamba</button>
+                <button data-target="tuesday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="tuesday">Salı</button>
+                <button data-target="wednesday-ingredients-content" class="ingredients-day-button active px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="wednesday">Çarşamba</button>
                 <button data-target="thursday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="thursday">Perşembe</button>
                 <button data-target="friday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="friday">Cuma</button>
                 <button data-target="saturday-ingredients-content" class="ingredients-day-button px-4 py-2 rounded-full font-bold bg-[#2d3748] text-gray-300 hover:bg-[#00ffff] hover:text-[#0d1117] transition-all" data-i18n="saturday">Cumartesi</button>
@@ -300,7 +298,7 @@
                 </div>
             </div>
 
-            <div id="tuesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section active">
+            <div id="tuesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section">
                 <div data-details="tuesday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
                     <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
@@ -358,18 +356,18 @@
                 </div>
             </div>
 
-            <div id="wednesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section" style="display: none;">
+            <div id="wednesday-ingredients-content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ingredients-content-section active">
                 <div data-details="wednesday-energy-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
                     <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
                     <div class="mt-4 progress-bar-container">
-                        <div class="progress-bar bg-[#38ffc0]" style="width: 85%;"></div>
+                        <div class="progress-bar bg-[#ff4d4d]" style="width: 100%;"></div>
                     </div>
-                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="high">Yüksek</span>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="high">Maksimum</span>
                 </div>
                 <div id="wednesday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
                     <p class="text-gray-300" data-i18n="wednesdayEnergyDetailsText">
-                        CAPE (Konvektif Kullanılabilir Potansiyel Enerji) değerleri, atmosferin dikey hareketi için ne kadar enerjiye sahip olduğunu gösterir. Çarşamba günü için, özellikle öğleden sonra, CAPE değerleri yüksek seviyelerde olup bu durum güçlü dikey hava akımlarının ve potansiyel olarak büyük dolu tanelerinin oluşabileceği anlamına gelir.
+                        CAPE (Konvektif Kullanılabilir Potansiyel Enerji) değerleri maksimum seviyede. Bu, atmosferin aşırı derecede kararsız olduğu ve en şiddetli fırtınaların oluşumu için tüm enerjinin mevcut olduğu anlamına gelir. Büyük dolu, yıkıcı rüzgarlar ve diğer şiddetli hava olayları için potansiyel zirvededir.
                     </p>
                 </div>
 
@@ -405,13 +403,13 @@
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="organizationCardTitle">Organizasyon</h3>
                     <p class="text-gray-400" data-i18n="organizationCardText">Fırtına sisteminin yapısı.</p>
                     <div class="mt-4 progress-bar-container">
-                        <div class="progress-bar bg-[#ff4d4d]" style="width: 40%;"></div>
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 65%;"></div>
                     </div>
-                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="weak">Zayıf</span>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="weak">Orta</span>
                 </div>
                 <div id="wednesday-organization-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
                     <p class="text-gray-300" data-i18n="wednesdayOrganizationDetailsText">
-                        Şu an için fırtına hücrelerinin organize bir sistem (örn: süper hücre) oluşturma potansiyeli düşük görünüyor. Rüzgar kesmesi (shear) değerleri, organize bir yapı için yeterli değil. Ancak bu durumun takip edilmesi gerekmektedir.
+                        Rüzgar kesmesi (shear) değerleri orta seviyeye yükseldi. Bu durum, fırtına hücrelerinin tekil ve dağınık olmak yerine çoklu hücreli (multicell) fırtına kümeleri veya hatları oluşturma potansiyelini artırır. Bu da fırtınanın daha geniş bir alanı etkilemesine ve daha uzun süreli olmasına neden olabilir.
                     </p>
                 </div>
             </div>
@@ -421,39 +419,39 @@
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="energyCardTitle">Enerji</h3>
                     <p class="text-gray-400" data-i18n="energyCardText">Atmosferdeki potansiyel enerji miktarı.</p>
                     <div class="mt-4 progress-bar-container">
-                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 65%;"></div>
                     </div>
-                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Orta</span>
                 </div>
                 <div id="thursday-energy-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
                     <p class="text-gray-300" data-i18n="thursdayEnergyDetailsText">
-                        Perşembe günü için potansiyel enerji seviyeleri ortalama düzeyde. Fırtına oluşumu için gerekli enerji seviyeleri yüksek değil.
+                        Perşembe günü için potansiyel enerji seviyeleri, bir önceki güne göre azalsa da hala orta düzeyde. Bu, yerel olarak kuvvetli olabilecek fırtınaların devam etme riskini sürdürüyor.
                     </p>
                 </div>
                 <div data-details="thursday-moisture-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="moistureCardTitle">Nem</h3>
                     <p class="text-gray-400" data-i18n="moistureCardText">Atmosferdeki su buharı miktarı.</p>
                     <div class="mt-4 progress-bar-container">
-                        <div class="progress-bar bg-[#ffeb3b]" style="width: 50%;"></div>
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 65%;"></div>
                     </div>
-                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Ortalama</span>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="average">Orta</span>
                 </div>
                 <div id="thursday-moisture-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
                     <p class="text-gray-300" data-i18n="thursdayMoistureDetailsText">
-                        Havadaki nem oranı ortalama seviyelerde. Bölgesel olarak hafif yağışlar görülebilir, ancak fırtına oluşumunu destekleyecek yeterli nem mevcut değil.
+                        Havadaki nem oranı hala yerel yağışları ve fırtınaları destekleyecek kadar orta seviyelerde. Özellikle kuzeybatı kesimlerde nemlilik devam ediyor.
                     </p>
                 </div>
                 <div data-details="thursday-trigger-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
                     <h3 class="text-2xl font-bold text-[#62d9ff] mb-2" data-i18n="triggerCardTitle">Tetikleyici</h3>
                     <p class="text-gray-400" data-i18n="triggerCardText">Hava hareketini başlatan mekanizma.</p>
                     <div class="mt-4 progress-bar-container">
-                        <div class="progress-bar bg-[#ff4d4d]" style="width: 30%;"></div>
+                        <div class="progress-bar bg-[#ffeb3b]" style="width: 60%;"></div>
                     </div>
-                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Düşük</span>
+                    <span class="block text-right text-sm text-gray-400 mt-1" data-i18n="low">Orta</span>
                 </div>
                 <div id="thursday-trigger-details" class="col-span-1 sm:col-span-2 lg:col-span-4 card-details bg-[#2d3748] p-6 rounded-2xl mt-4">
                     <p class="text-gray-300" data-i18n="thursdayTriggerDetailsText">
-                        Perşembe günü için atmosferi tetikleyecek belirgin bir mekanizma beklenmiyor. Gün içi ısınma dışında bir tetikleyici bulunmuyor.
+                        Perşembe günü, ana sistemin artığı olan zayıf bir oluk ve yüzeydeki sıcaklık farkları, yerel fırtınaları başlatmak için orta düzeyde bir tetikleyici görevi görebilir.
                     </p>
                 </div>
                 <div data-details="thursday-organization-details" class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#00ffff]">
@@ -641,11 +639,13 @@
         <section id="scenario" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="scenarioTitle">Senaryo Analizi</h2>
             <div id="scenario-content" class="text-lg text-gray-300">
-                <p class="mb-4" data-i18n="scenarioText1">
-                    Fırtına bileşenlerinin kombinasyonuna dayanarak Salı günü için atmosferik bir senaryo hazırlanmıştır.
+                <h3 class="text-2xl font-bold text-[#62d9ff] mt-4 mb-2">Çarşamba Senaryosu</h3>
+                <p class="mb-4">
+                    Çarşamba günü, yüksek atmosferik kararsızlık (CAPE), bol nem ve tetikleyici mekanizmaların bir araya gelmesiyle Marmara ve Ege'nin kuzeyinde şiddetli orajların gelişmesi beklenmektedir. Düşük organizasyon (shear) nedeniyle fırtınaların süper hücre yapısından ziyade, yerel olarak kuvvetli ve dağınık hücreler şeklinde olması öngörülmektedir. Bu durum, dolu, şiddetli yağış ve yoğun şimşek aktivitesi riskini beraberinde getirmektedir.
                 </p>
-                <p data-i18n="scenarioText2">
-                    - Güçlü enerji (CAPE), yüksek nem ve bir tetikleyici mekanizmanın varlığı, fırtına hücrelerinin oluşacağını gösteriyor. Görece düşük organizasyon (Bulk Shear), bu fırtınaların yerel olarak şiddetli olacağını, ancak büyük ve organize bir sistemin parçası olmayacağını düşündürüyor.
+                <h3 class="text-2xl font-bold text-[#62d9ff] mt-6 mb-2">Perşembe Senaryosu</h3>
+                <p>
+                   Perşembe sabah saatlerinde, ana sistemin zayıflamasıyla birlikte kuzeybatı kesimlerinde fırtınaların hafif şekilde devam etme ihtimali bulunmaktadır. Bu etki özellikle Kocaeli-Sakarya hattında yerel yağış geçişleri olarak görülebilir.
                 </p>
             </div>
         </section>
@@ -655,70 +655,100 @@
             <div id="city-analysis-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Bursa</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%65</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%85</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                             Verilere göre Bursa'da oraj oluşumu için yüksek potansiyel bulunmaktadır. Rüzgar yönü ve hızındaki belirgin değişiklikler, atmosferde bir cephe veya hava kütlesi değişiminin habercisi olabilir. Saat 15:00'te belirtilen vorticity (+10, +20) ve öğle saatlerinde 40'larda olan bulk shear değerleri, kuvvetli fırtına potansiyeline ve dönme hareketlerine işaret etmektedir. Nem oranının geceye doğru %70'e kadar yükselmesi de oraj için gerekli koşulları sağlamaktadır. Bu durum, özellikle öğleden sonra ve akşam saatlerinde yerel olarak kuvvetli orajların oluşabileceğini göstermektedir.
+                             Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
                         </p>
                     </div>
                 </div>
-
-                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
-                    <h3 class="text-2xl font-bold neon-text mb-2"></h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
-                    <div class="card-details">
-                        <p class="text-gray-300">
-                            Orhaneli gibi dağlık bölgelerde, yüksek sıcaklık ve nemin birleşimi güçlü termik yükselimlere neden olur. Sizin verilerinizdeki 1000'e yakın CAPE değerleri ve yüksek nem oranları (%43-%70), bu coğrafi özelliklerle birleştiğinde oraj oluşumu için en ideal ortamı yaratır. Oraj ihtimali, öğleden sonra zirveye ulaşacak olup, yerel olarak şiddetli yağış, dolu ve rüzgar beklenebilir.
-                        </p>
-                    </div>
-                </div>
-                
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Balıkesir</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%60</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%80</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                            Balıkesir için de yüksek CAPE ve yeterli nem koşulları mevcuttur. Öğleden sonraki saatlerde 35-40'a ulaşan bulk shear değerleri ve saat 18:00'de rüzgarın 30km/s hıza ulaşması, kuvvetli konvektif hareketlerin olabileceğini düşündürmektedir. Bu durum, yerel olarak güçlü oraj hücrelerinin oluşumuna zemin hazırlamaktadır. Bursa'ya göre biraz daha düşük bir ihtimal olsa da risk devam etmektedir.
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
                         </p>
                     </div>
                 </div>
-
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
-                    <h3 class="text-2xl font-bold neon-text mb-2">Eskişehir</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%50</span></p>
+                    <h3 class="text-2xl font-bold neon-text mb-2">Çanakkale</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%80</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                            Sağladığınız verilere göre Eskişehir'de +20, +30 gibi yüksek vorticity (dönme hareketi) değerleri bulunmaktadır. Bu durum, bölgede yüksek enerji potansiyeli ile birlikte oraj oluşumunu tetikleyebilecek hava hareketlerinin olduğunu göstermektedir. Bulk shear değerleri diğer bölgelere göre daha düşük olsa da, yüksek enerji ve vorticity, yerel olarak kuvvetli oraj riskini artırmaktadır. Öğleden sonra termik yükselimlerle birlikte kısa süreli ve yerel orajlar görülebilir.
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
                         </p>
                     </div>
                 </div>
-                
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Tekirdağ</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%75</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
+                        </p>
+                    </div>
+                </div>
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Edirne</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%75</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
+                        </p>
+                    </div>
+                </div>
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Kırklareli</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
+                        </p>
+                    </div>
+                </div>
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">Yalova</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                            Çarşamba günü beklenen gök gürültülü fırtınalar bu bölgede etkili olabilir. Yerel olarak dolu ihtimali ve bol şimşek aktivitesi riski bulunmaktadır. Lütfen dikkatli olunuz.
+                        </p>
+                    </div>
+                </div>
+                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
                     <h3 class="text-2xl font-bold neon-text mb-2">Kütahya</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%65</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                            Kütahya'da yüksek sıcaklık ve nemin birleşimiyle güçlü termik yükselimler beklenmektedir. Yüksek CAPE değerleri ve yeterli nem, oraj oluşumu için ideal koşulları sağlamaktadır.
+                            Çarşamba akşam saatlerinde bu hatta yerel gök gürültülü fırtınalar bekleniyor. Dolu ihtimali ve bol şimşek aktivitesi riski mevcut.
                         </p>
                     </div>
                 </div>
-
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
-                    <h3 class="text-2xl font-bold neon-text mb-2">İnegöl (Bursa)</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <h3 class="text-2xl font-bold neon-text mb-2">Manisa</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%60</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                            İnegöl'de yüksek CAPE ve Bulk Shear değerleri, kuvvetli fırtına potansiyeline işaret etmektedir. Öğleden sonra ve akşam saatlerinde yerel olarak kuvvetli orajlar ve hücre oluşumları beklenmektedir.
+                           Çarşamba akşam saatlerinde bu hatta yerel gök gürültülü fırtınalar bekleniyor. Dolu ihtimali ve bol şimşek aktivitesi riski mevcut.
                         </p>
                     </div>
                 </div>
-
                 <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
-                    <h3 class="text-2xl font-bold neon-text mb-2">Tavşanlı (Kütahya)</h3>
-                    <p class="text-lg text-gray-300 mb-4">Salı günü fırtına/oraj ihtimali: <span class="text-[#ffeb3b] text-3xl font-bold">~%70-80</span></p>
+                    <h3 class="text-2xl font-bold neon-text mb-2">Uşak</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%60</span></p>
                     <div class="card-details">
                         <p class="text-gray-300">
-                            Tavşanlı'da dağlık coğrafya ve yüksek nemin birleşimi, oraj oluşumu için uygun ortamı yaratmaktadır. Yüksek ihtimalle kısa süreli ancak etkili orajlar görülebilir.
+                            Çarşamba akşam saatlerinde bu hatta yerel gök gürültülü fırtınalar bekleniyor. Dolu ihtimali ve bol şimşek aktivitesi riski mevcut.
+                        </p>
+                    </div>
+                </div>
+                <div class="card bg-[#1a202c] p-6 rounded-2xl shadow-lg border border-[#2d3748] hover:border-[#ffeb3b]">
+                    <h3 class="text-2xl font-bold neon-text mb-2">İzmir (Karasal)</h3>
+                    <p class="text-lg text-gray-300 mb-4">Çarşamba günü fırtına/oraj ihtimali: <span class="text-[#ff4d4d] text-3xl font-bold">~%55</span></p>
+                    <div class="card-details">
+                        <p class="text-gray-300">
+                           Çarşamba akşam saatlerinde bu hatta yerel gök gürültülü fırtınalar bekleniyor. Dolu ihtimali ve bol şimşek aktivitesi riski mevcut.
                         </p>
                     </div>
                 </div>
@@ -728,16 +758,13 @@
         <section id="verdict" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="verdictTitle">Karar & Tavsiye</h2>
             <div id="verdict-content" class="text-lg text-gray-300">
-                <h3 class="text-2xl font-bold text-[#62d9ff] mb-4">Salı Analizi ve Tavsiye</h3>
-                <p class="mb-4" data-i18n="verdictText1">
-                    Tüm verilerin analizine dayanarak, özellikle Bursa ve çevresinde kuvvetli fırtına potansiyeli yüksek beklenmektedir.
-                </p>
-                <p class="mb-4" data-i18n="verdictText2">
-                    - Yüksek CAPE ve Bulk Shear değerleri olan bölgelerin özellikle takip edilmesi gerekmektedir. Kuvvetli fırtına ve şiddetli yağışlar olasıdır.
-                </p>
-                <h3 class="text-2xl font-bold text-[#62d9ff] mt-8 mb-4">Çarşamba Analizi ve Tavsiye</h3>
+                <h3 class="text-2xl font-bold text-[#62d9ff] mb-4">Çarşamba Analizi ve Tavsiye</h3>
                 <p class="mb-4">
                     Çarşamba günü için yapılan profesyonel analizlere göre; İstanbul, Tekirdağ, Kocaeli, Sakarya, Bursa ve Bilecik illerinde kuvvetli gök gürültülü sağanak yağışlar beklenmektedir. Bu bölgelerde zaman zaman yüksek yoğunlukta şimşek aktivitesi kaydedileceğinden, ilgili otoritelerin ve vatandaşların dikkatli olması büyük önem taşımaktadır. Özellikle İstanbul ilinde, atmosferik koşulların dolu oluşumu için uygun olduğu gözlemlenmiştir. Olası olumsuzluklara karşı gerekli önlemlerin alınması tavsiye edilir.
+                </p>
+                <h3 class="text-2xl font-bold text-[#62d9ff] mt-8 mb-4">Perşembe Analizi ve Tavsiye</h3>
+                <p class="mb-4" data-i18n="verdictTextThursday">
+                    Perşembe günü, ana fırtına sisteminin etkisi azalmakla birlikte, sabah saatlerinde özellikle Kocaeli ve Sakarya çevrelerinde fırtınaların hafif şekilde devam etme riski bulunmaktadır. Bu bölgelerde yaşayanların sabah saatlerinde dikkatli olması önerilir.
                 </p>
                 <p data-i18n="verdictText3">
                     - Meteoroloji Genel Müdürlüğü'nün yerel hava tahminlerini takip etmeniz ve olası olumsuz hava olaylarına karşı hazırlıklı olmanız tavsiye edilir.
@@ -748,6 +775,18 @@
         <section id="predictions" class="content-section p-6 md:p-10 bg-[#161b22] rounded-3xl shadow-xl neon-border mb-8">
             <h2 class="text-3xl md:text-4xl font-bold neon-text mb-6" data-i18n="predictionsTitle">Tahmin Sonuçları</h2>
             
+             <div class="bg-[#1a202c] border border-cyan-500/50 p-6 rounded-2xl mb-10 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h4M8 7a2 2 0 012-2h4a2 2 0 012 2v8a2 2 0 01-2 2h-4a2 2 0 01-2-2V7z" />
+                    </svg>
+                    <div>
+                        <h4 class="text-2xl font-bold text-cyan-400">Tahmin Arşivi</h4>
+                        <p class="text-gray-300">Geçmiş günlere ait tahmin sonuçlarına ve analizlere buradan ulaşabilirsiniz. (Yakında aktif olacak)</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="mb-10">
                 <h3 class="text-3xl font-bold text-[#62d9ff] mb-6">5 Ağustos Salı 2025</h3>
 
@@ -859,8 +898,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const navButtons = document.querySelectorAll('.nav-button');
             const sections = document.querySelectorAll('.content-section');
-            const cardHeaders = document.querySelectorAll('.card');
-
+            
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     navButtons.forEach(btn => btn.classList.remove('active'));
@@ -879,17 +917,24 @@
                 });
             });
 
-            cardHeaders.forEach(card => {
-                const detailsId = card.dataset.details;
-                if (detailsId) {
-                    const details = document.getElementById(detailsId);
-                    if (details) {
-                        card.addEventListener('click', () => {
-                            details.classList.toggle('open');
-                        });
+            // Card click logic for all cards, including the ones in the cities section
+            document.querySelector('main').addEventListener('click', (event) => {
+                const card = event.target.closest('.card');
+                if (card) {
+                    // This prevents clicks on buttons inside cards from toggling details
+                    if (event.target.closest('button')) {
+                        return;
+                    }
+
+                    const detailsId = card.dataset.details;
+                    const detailsDiv = detailsId ? document.getElementById(detailsId) : card.querySelector('.card-details');
+                    
+                    if (detailsDiv) {
+                        detailsDiv.classList.toggle('open');
                     }
                 }
             });
+
 
             // Ingredients tab day selector logic
             const ingredientsDayButtons = document.querySelectorAll('.ingredients-day-button');
@@ -930,13 +975,11 @@
             // Language switcher logic
             const langSwitcher = document.getElementById('lang-switcher');
             const langText = document.getElementById('lang-text');
-            const currentLang = 'tr'; // Assuming Turkish is the default based on user prompt
+            const currentLang = 'tr';
 
             langSwitcher.addEventListener('click', () => {
                 const newLang = langText.textContent === 'TR' ? 'EN' : 'TR';
                 langText.textContent = newLang;
-                // Add logic here to change the language of the page content
-                // For example, by updating text based on data-i18n attributes
             });
 
         });
